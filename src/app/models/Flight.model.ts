@@ -1,4 +1,4 @@
-import { getTimeIn12HourFormat } from "../shared/helper/DateHelper";
+import moment from "moment";
 
 export interface IFlightContract {
   id: string;
@@ -43,18 +43,18 @@ export class FlightModel implements IFlight {
   public readonly availableSeats: number;
 
   public get departureDate(): string {
-    return null;
+    return moment(this._departureTimeStamp).format("Do MMM YYYY");
   }
 
   public get departureTime(): string {
-    return getTimeIn12HourFormat(this._departureTimeStamp);
+    return moment(this._departureTimeStamp).format("LT");
   }
 
   public get arrivalDate(): string {
-    return null;
+    return moment(this._arrivalTimeStamp).format("Do MMM YYYY");
   }
 
   public get arrivalTime(): string {
-    return getTimeIn12HourFormat(this._arrivalTimeStamp);
+    return moment(this._arrivalTimeStamp).format("LT");
   }
 }
