@@ -1,0 +1,11 @@
+.app-header {
+  height: 100px;
+  display: flex;
+  flex: 1 0 0;
+  align-items: center;
+  background: $primary-color;
+  padding: 0 10px;
+  &__title {
+    color: $white-color;
+  }
+}

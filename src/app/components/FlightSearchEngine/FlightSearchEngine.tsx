@@ -6,6 +6,11 @@ export default class FlightSearchEngine extends React.Component<{}> {
   }
 
   public render() {
-    return <h2>Flight Search - App</h2>;
+    return (
+      <div className="grid-container">
+        <div className="grid-1-of-3">Side View</div>
+        <div className="grid-2-of-3">Result View</div>
+      </div>
+    );
   }
 }

@@ -1,0 +1,11 @@
+$golden-rule-value: 1.618;
+$container-width: 1024px;
+$result-view-width: $container-width / $golden-rule-value;
+$side-bar-width: $container-width - $result-view-width;
+
+/*Color Variables*/
+$primary-color: #9c27b0;
+$secondary-color: #d500f9;
+
+$body-color: #212121;
+$white-color: #ffffff;
