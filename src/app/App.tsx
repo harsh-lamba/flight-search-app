@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import { Header } from "./shared/Components/Header";
-import FlightSearchEngine from "./components/FlightSearchEngine/FlightSearchEngine";
+import { Header } from "./shared/components/header/Header";
+import FlightSearchEngine from "./components/flightSearchEngine/FlightSearchEngine";
 
 export default class App extends React.Component<{}> {
   public render() {
