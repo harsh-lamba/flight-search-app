@@ -7,11 +7,12 @@ import {
 
 export interface IFlightSearchViewModel {
   isFlightFetching: boolean;
+  isFormValid: boolean;
   originCity: IField<string>;
   destinationCity: IField<string>;
   departureDate: IField<string>;
   returnDate: IField<string>;
-  passengers: IField<number>;
+  passengers: IField<string>;
   searchFlights(): void;
   dispose(): void;
 }
@@ -22,15 +23,15 @@ export default class FlightSearchViewModel implements IFlightSearchViewModel {
   private _destinationCity: IField<string>;
   private _departureDate: IField<string>;
   private _returnDate: IField<string>;
-  private _passengers: IField<number>;
+  private _passengers: IField<string>;
   private _searchFlightService: ISearchFlightService;
   constructor() {
     this._isFlightFetching = false;
-    this._originCity = new Field("Enter Origin City", null);
-    this._destinationCity = new Field("Enter Destination City", null);
-    this._departureDate = new Field("Departure Date", null);
-    this._returnDate = new Field("Return Date", null);
-    this._passengers = new Field("Pssengers", null);
+    this._originCity = new Field("Enter Origin City", "");
+    this._destinationCity = new Field("Enter Destination City", "");
+    this._departureDate = new Field("Departure Date", "");
+    this._returnDate = new Field("Return Date", "");
+    this._passengers = new Field("Passengers", "");
 
     this.fillDepartureDate();
     this.fillReturnDate();
@@ -41,6 +42,16 @@ export default class FlightSearchViewModel implements IFlightSearchViewModel {
 
   public get isFlightFetching(): boolean {
     return this._isFlightFetching;
+  }
+
+  public get isFormValid(): boolean {
+    return (
+      this._originCity.value &&
+      this._destinationCity.value &&
+      this._departureDate.value &&
+      this._returnDate.value &&
+      this._passengers.value !== "0"
+    );
   }
 
   public get originCity(): IField<string> {
@@ -59,7 +70,7 @@ export default class FlightSearchViewModel implements IFlightSearchViewModel {
     return this._returnDate;
   }
 
-  public get passengers(): IField<number> {
+  public get passengers(): IField<string> {
     return this._passengers;
   }
 
@@ -71,7 +82,7 @@ export default class FlightSearchViewModel implements IFlightSearchViewModel {
         destinationCity: this._destinationCity.value,
         departureDate: this._departureDate.value,
         returnDate: this._returnDate.value,
-        passengers: this._passengers.value
+        passengers: +this.passengers.value
       })
       .then(() => {
         this._isFlightFetching = false;
@@ -87,7 +98,7 @@ export default class FlightSearchViewModel implements IFlightSearchViewModel {
   }
 
   private fillPassengers() {
-    this._passengers.possibleValues = [1, 2, 3, 4, 5];
+    this._passengers.possibleValues = ["1", "2", "3", "4", "5"];
   }
 
   public dispose(): void {}

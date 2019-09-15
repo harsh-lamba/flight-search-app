@@ -50,6 +50,7 @@ export default class SearchFlightService implements ISearchFlightService {
       //Async operation-started
       const flights = flightsJson.map(flight => new FlightModel(flight));
       this._flights = this.getSearchedFlights(flights, searchCriteria);
+      console.log(this._flights);
       //Async operation-finished
       this._searchCompleted.raise(null, this);
 
