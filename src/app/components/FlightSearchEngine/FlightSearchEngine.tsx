@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import FlightSearch from "../flightSearch/FlightSearch";
+import FlightResult from "../flightResult/FlightResult";
 
 export default class FlightSearchEngine extends React.Component<{}> {
   constructor(props: {}) {
@@ -13,7 +14,9 @@ export default class FlightSearchEngine extends React.Component<{}> {
         <div className="grid-1-of-3">
           <FlightSearch />
         </div>
-        <div className="grid-2-of-3">Result View</div>
+        <div className="grid-2-of-3">
+          <FlightResult />
+        </div>
       </div>
     );
   }

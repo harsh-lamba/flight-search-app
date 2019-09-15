@@ -4,6 +4,7 @@ import {
   ISearchFlightService,
   ISearchCriteria
 } from "../../services/SearchFlight.service";
+import Event, { IEvent } from "../../core/Event";
 
 export interface IFlightResultViewModel {
   isFetching: boolean;
@@ -12,6 +13,7 @@ export interface IFlightResultViewModel {
   departureDate: string;
   returnDate: string;
   resultItems: IFlightResultItem[];
+  updateView: IEvent;
   bookFlight(): void;
   dispose(): void;
 }
@@ -31,14 +33,17 @@ export default class FlightResultViewModel implements IFlightResultViewModel {
   private _resultItems: IFlightResultItem[] = [];
 
   constructor() {
+    this.updateView = new Event();
     this._searchFlightService = ServiceFactory.getSearchFlightInstance();
-    this._searchFlightService.serachStarted.subscribe(
+    this._searchFlightService.searchStarted.subscribe(
       this.searchStarted.bind(this)
     );
     this._searchFlightService.searchCompleted.subscribe(
       this.searchCompleted.bind(this)
     );
   }
+
+  public readonly updateView: Event;
 
   public get isFetching(): boolean {
     return this._isFetching;
@@ -73,6 +78,7 @@ export default class FlightResultViewModel implements IFlightResultViewModel {
   private searchStarted() {
     this._isFetching = true;
     this._resultItems = [];
+    this.updateView.raise();
   }
 
   private searchCompleted() {
@@ -88,13 +94,15 @@ export default class FlightResultViewModel implements IFlightResultViewModel {
     this._returnDate = searchCriteria.returnDate;
 
     this.buildResultItems(this._searchFlightService.flights, searchCriteria);
+
+    this.updateView.raise();
   }
 
   private buildResultItems(
     flights: IFlight[],
     searchCriteria: ISearchCriteria
   ): void {
-    const hasReturnFlight = !searchCriteria.returnDate;
+    const hasReturnFlight = !!searchCriteria.returnDate;
     this._resultItems = [];
 
     const onewayFlights = flights.filter(
@@ -136,7 +144,7 @@ export default class FlightResultViewModel implements IFlightResultViewModel {
   }
 
   public dispose() {
-    this._searchFlightService.serachStarted.unSubscribe(
+    this._searchFlightService.searchStarted.unSubscribe(
       this.searchStarted.bind(this)
     );
     this._searchFlightService.searchCompleted.unSubscribe(

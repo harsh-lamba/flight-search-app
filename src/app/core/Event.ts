@@ -23,6 +23,7 @@ export default class Event implements IEvent {
   }
 
   public unSubscribe(observer: Function) {
+    console.log("unsubscribe");
     this._observers.delete(observer);
   }
 }

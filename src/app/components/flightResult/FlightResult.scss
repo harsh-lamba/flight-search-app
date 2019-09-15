@@ -1,0 +1,50 @@
+//TODO: Refactor
+.flight-result {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  padding: 10px;
+  &__no-data {
+    padding: 10px;
+  }
+  &__header {
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__date {
+    display: flex;
+    flex-direction: column;
+  }
+  &__item {
+    display: flex;
+    flex-direction: row;
+    flex: 1 0 0;
+  }
+  &__item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 0;
+  }
+  &__item-price {
+    font-size: 2rem;
+  }
+  &__item-flights {
+    display: flex;
+  }
+  &__item-oneway {
+    flex: 1 0 0;
+  }
+  &__action-container {
+    width: 200px;
+  }
+  &__flightName {
+    font-size: 1.3rem;
+  }
+  &__item-breadcrumb {
+    font-size: 1.5rem;
+  }
+}

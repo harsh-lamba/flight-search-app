@@ -5,7 +5,8 @@ import SearchFlightService, {
 export default class ServiceFactory {
   private static _searchFlightServiceInstance: ISearchFlightService;
   public static getSearchFlightInstance(): ISearchFlightService {
-    if (!this._searchFlightServiceInstance) return new SearchFlightService();
+    if (!this._searchFlightServiceInstance)
+      this._searchFlightServiceInstance = new SearchFlightService();
 
     return this._searchFlightServiceInstance;
   }

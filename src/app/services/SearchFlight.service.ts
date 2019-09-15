@@ -12,7 +12,7 @@ export interface ISearchCriteria {
 }
 
 export interface ISearchFlightService {
-  serachStarted: IEvent;
+  searchStarted: IEvent;
   searchCompleted: IEvent;
   flights: IFlight[];
   searchCriteria: ISearchCriteria;
@@ -31,16 +31,20 @@ export default class SearchFlightService implements ISearchFlightService {
     this._flights = [];
   }
 
-  public readonly readyState: IEvent;
-  public readonly serachStarted: IEvent;
-  public readonly searchCompleted: IEvent;
-
   public get flights(): IFlight[] {
     return this._flights;
   }
 
   public get searchCriteria(): ISearchCriteria {
     return this._searchCriteria;
+  }
+
+  public get searchStarted(): IEvent {
+    return this._searchStarted;
+  }
+
+  public get searchCompleted(): IEvent {
+    return this._searchCompleted;
   }
 
   public fetchFlight(searchCriteria: ISearchCriteria): Promise<IFlight[]> {
@@ -63,9 +67,12 @@ export default class SearchFlightService implements ISearchFlightService {
     searchCriteria: ISearchCriteria
   ): IFlight[] {
     return flights.filter(flight => {
+      console.log("flight.availableSeats", flight.availableSeats);
+      console.log("searchCriteria.passengers", searchCriteria.passengers);
       return (
-        (this.isDepartureFlightMatch || this.isReturnFlightMatch) &&
-        flight.availableSeats <= searchCriteria.passengers
+        (this.isDepartureFlightMatch(searchCriteria, flight) ||
+          this.isReturnFlightMatch(searchCriteria, flight)) &&
+        flight.availableSeats >= searchCriteria.passengers
       );
     });
   }
