@@ -22,7 +22,7 @@ export interface IFlight {
   availableSeats: number;
 }
 
-export class FlightModel implements IFlight {
+export class FlightEntityModel implements IFlight {
   private _departureTimeStamp: number;
   private _arrivalTimeStamp: number;
 

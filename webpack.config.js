@@ -11,7 +11,8 @@ module.exports = {
     publicPath: "/"
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    watchContentBase: true,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".json"]

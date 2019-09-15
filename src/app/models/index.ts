@@ -1,3 +1,3 @@
-import { IFlight, FlightModel } from "./Flight.model";
+import { IFlight, FlightEntityModel } from "./Flight.EntityModel";
 
-export { IFlight, FlightModel };
+export { IFlight, FlightEntityModel as FlightModel };

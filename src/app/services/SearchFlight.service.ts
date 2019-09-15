@@ -1,6 +1,6 @@
 import { flightsJson } from "../../mock/mock";
 
-import CustomEvent, { ICustomEvent } from "../core/CustomEvent";
+import Event, { IEvent } from "../core/Event";
 import { IFlight, FlightModel } from "../models";
 
 export interface ISearchCriteria {
@@ -11,41 +11,47 @@ export interface ISearchCriteria {
   passengers: number;
 }
 
-export interface ISearchFlight {
-  fetchFlight(searchCriteria: ISearchCriteria): Promise<IFlight[]>;
-  readyState: ICustomEvent;
+export interface ISearchFlightService {
+  serachStarted: IEvent;
+  searchCompleted: IEvent;
   flights: IFlight[];
+  searchCriteria: ISearchCriteria;
+  fetchFlight(searchCriteria: ISearchCriteria): Promise<IFlight[]>;
 }
 
-export default class SearchFlightService implements ISearchFlight {
-  private _readyState: CustomEvent;
-  private _isReady: boolean;
+export default class SearchFlightService implements ISearchFlightService {
+  private _searchStarted: Event;
+  private _searchCompleted: Event;
   private _flights: IFlight[];
+  private _searchCriteria: ISearchCriteria;
 
   constructor() {
-    this._readyState = new CustomEvent();
-    this._isReady = true;
+    this._searchStarted = new Event();
+    this._searchCompleted = new Event();
     this._flights = [];
   }
 
-  public readonly readyState: ICustomEvent;
-
-  public get isReady(): boolean {
-    return this._isReady;
-  }
+  public readonly readyState: IEvent;
+  public readonly serachStarted: IEvent;
+  public readonly searchCompleted: IEvent;
 
   public get flights(): IFlight[] {
     return this._flights;
   }
 
+  public get searchCriteria(): ISearchCriteria {
+    return this._searchCriteria;
+  }
+
   public fetchFlight(searchCriteria: ISearchCriteria): Promise<IFlight[]> {
     return new Promise((resolve, reject) => {
-      this._isReady = false;
-      //Async operation
+      this._searchCriteria = searchCriteria;
+      this._searchStarted.raise(null, this);
+      //Async operation-started
       const flights = flightsJson.map(flight => new FlightModel(flight));
       this._flights = this.getSearchedFlights(flights, searchCriteria);
-      this._isReady = true;
-      this._readyState.raise(null, this);
+      //Async operation-finished
+      this._searchCompleted.raise(null, this);
 
       resolve();
     });

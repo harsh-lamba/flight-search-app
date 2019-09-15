@@ -1,11 +1,11 @@
 import Logger from "./Logger";
 
-export interface ICustomEvent {
+export interface IEvent {
   subscribe(observer: Function): void;
   unSubscribe(observer: Function): void;
 }
 
-export default class CustomEvent implements ICustomEvent {
+export default class Event implements IEvent {
   private _observers: Map<any, any>;
   constructor() {
     this._observers = new Map();
@@ -18,7 +18,7 @@ export default class CustomEvent implements ICustomEvent {
     this._observers.set(observer, observer);
   }
 
-  public raise(data: any, context: any) {
+  public raise(data?: any, context?: any) {
     this._observers.forEach(observer => observer(data, context));
   }
 
