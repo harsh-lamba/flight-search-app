@@ -11,5 +11,10 @@ export interface IInputProps {
 }
 
 export const InputField: React.FC<IInputProps> = props => {
-  return <input {...props} />;
+  return (
+    <div className="form-group">
+      <label className="form-group__label">{props.title}</label>
+      <input {...props} />;
+    </div>
+  );
 };

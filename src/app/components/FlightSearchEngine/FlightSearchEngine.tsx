@@ -11,7 +11,7 @@ export default class FlightSearchEngine extends React.Component<{}> {
   public render() {
     return (
       <div className="grid-container">
-        <div className="grid-1-of-3">
+        <div className="grid-1-of-3 flight-search">
           <FlightSearch />
         </div>
         <div className="grid-2-of-3">

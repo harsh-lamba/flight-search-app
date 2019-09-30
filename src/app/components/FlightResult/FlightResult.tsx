@@ -29,7 +29,9 @@ export default class FlightResult extends React.Component<
     return (
       <div className="flight-result">
         {this.state.model.emptyResult && (
-          <h1 className="flight-result__no-data">No data to display</h1>
+          <h1 className="flight-result__no-data text-center">
+            No data to display
+          </h1>
         )}
         {!this.state.model.emptyResult && (
           <React.Fragment>
@@ -42,42 +44,44 @@ export default class FlightResult extends React.Component<
                 <label>Return: {this.state.model.returnDate}</label>
               </div>
             </div>
-            {this.state.model.resultItems.map(item => {
-              return (
-                <div className="flight-result__item margin-bottom-1x">
-                  <div className="flight-result__item-info">
-                    <h4 className="flight-result__item-price">
-                      Rs. {item.price}
-                    </h4>
-                    <div className="flight-result__item-flights">
-                      <div className="flight-result__item-oneway">
-                        <h5 className="flight-result__flightName">
-                          {item.oneWayFlight.id}
-                        </h5>
-                        <h4 className="flight-result__item-breadcrumb">
-                          {item.oneWayFlight.originCity}>
-                          {item.oneWayFlight.destinationCity}
-                        </h4>
-                        <h4>Depart: {item.oneWayFlight.departureTime}</h4>
-                        <h4>Arrive: {item.oneWayFlight.arrivalTime}</h4>
-                      </div>
-                      <div className="flight-result__item-return">
-                        <h5 className="flight-result__flightName">
-                          {item.oneWayFlight.id}
-                        </h5>
-                        <h4 className="flight-result__item-breadcrumb">
-                          {item.oneWayFlight.originCity}>
-                          {item.oneWayFlight.destinationCity}
-                        </h4>
-                        <h4>Depart: {item.oneWayFlight.departureTime}</h4>
-                        <h4>Arrive: {item.oneWayFlight.arrivalTime}</h4>
+            <div className="">
+              {this.state.model.resultItems.map(item => {
+                return (
+                  <div className="flight-result__item margin-bottom-1x">
+                    <div className="flight-result__item-info">
+                      <h4 className="flight-result__item-price">
+                        Rs. {item.price}
+                      </h4>
+                      <div className="flight-result__item-flights">
+                        <div className="flight-result__item-oneway">
+                          <h5 className="flight-result__flightName">
+                            {item.oneWayFlight.id}
+                          </h5>
+                          <h4 className="flight-result__item-breadcrumb">
+                            {item.oneWayFlight.originCity}>
+                            {item.oneWayFlight.destinationCity}
+                          </h4>
+                          <h4>Depart: {item.oneWayFlight.departureTime}</h4>
+                          <h4>Arrive: {item.oneWayFlight.arrivalTime}</h4>
+                        </div>
+                        <div className="flight-result__item-return">
+                          <h5 className="flight-result__flightName">
+                            {item.oneWayFlight.id}
+                          </h5>
+                          <h4 className="flight-result__item-breadcrumb">
+                            {item.oneWayFlight.originCity}>
+                            {item.oneWayFlight.destinationCity}
+                          </h4>
+                          <h4>Depart: {item.oneWayFlight.departureTime}</h4>
+                          <h4>Arrive: {item.oneWayFlight.arrivalTime}</h4>
+                        </div>
                       </div>
                     </div>
+                    <div className="flight-result__action-container"></div>
                   </div>
-                  <div className="flight-result__action-container"></div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </React.Fragment>
         )}
       </div>
@@ -85,7 +89,6 @@ export default class FlightResult extends React.Component<
   }
 
   private updateView() {
-    console.log("in");
     this.setState(state => {
       return { model: state.model };
     });

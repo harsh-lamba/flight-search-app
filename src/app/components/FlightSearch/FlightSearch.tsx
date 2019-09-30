@@ -30,11 +30,11 @@ export default class FlightSearch extends React.Component<
         <InputField
           id="originCity"
           type="text"
-          className="form-control margin-top-1x margin-bottom-1x"
+          className="form-control margin-bottom-1x"
           placeholder="Enter Origin City - PNQ,DEL,MUB,BENG"
           value={this.state.model.originCity.value}
           onChange={this.onFieldChangeCallback.bind(this)}
-          title='Please Use "PNQ,DEL,MUB,BENG,"'
+          title="Origin City"
         />
         <InputField
           id="destinationCity"
@@ -43,10 +43,11 @@ export default class FlightSearch extends React.Component<
           placeholder="Enter Destination City - PNQ,DEL,MUB,BENG"
           value={this.state.model.destinationCity.value}
           onChange={this.onFieldChangeCallback.bind(this)}
-          title='Please Use "PNQ,DEL,MUB,BENG,"'
+          title="Destination City"
         />
         <SelectField
           id="departureDate"
+          title="Departure Date"
           className="form-control margin-bottom-1x"
           placeholder="Departure date"
           value={this.state.model.departureDate.value}
@@ -55,6 +56,7 @@ export default class FlightSearch extends React.Component<
         />
         <SelectField
           id="returnDate"
+          title="Return Date"
           className="form-control margin-bottom-1x"
           placeholder="Return date"
           value={this.state.model.returnDate.value}
@@ -63,6 +65,7 @@ export default class FlightSearch extends React.Component<
         />
         <SelectField
           id="passengers"
+          title="Passengers"
           className="form-control margin-bottom-1x"
           placeholder="Passengers"
           value={this.state.model.passengers.value}

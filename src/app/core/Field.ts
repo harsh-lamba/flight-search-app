@@ -3,7 +3,7 @@ import Event, { IEvent } from "./Event";
 export interface IField<T> {
   title: string;
   value: T;
-  possibleValues: T[];
+  possibleValues?: T[];
   valueChanged: IEvent;
 }
 
