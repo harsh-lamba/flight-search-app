@@ -26,6 +26,7 @@ export default class FlightResult extends React.Component<
 
   public render() {
     console.log("in");
+    console.log(this.state.model.resultItems);
     return (
       <div className="flight-result">
         {this.state.model.emptyResult && (
@@ -44,7 +45,7 @@ export default class FlightResult extends React.Component<
                 <label>Return: {this.state.model.returnDate}</label>
               </div>
             </div>
-            <div className="">
+            <div className="flight-result__item-container">
               {this.state.model.resultItems.map(item => {
                 return (
                   <div className="flight-result__item margin-bottom-1x">
@@ -66,18 +67,25 @@ export default class FlightResult extends React.Component<
                         </div>
                         <div className="flight-result__item-return">
                           <h5 className="flight-result__flightName">
-                            {item.oneWayFlight.id}
+                            {item.returnFlight.id}
                           </h5>
                           <h4 className="flight-result__item-breadcrumb">
-                            {item.oneWayFlight.originCity}>
-                            {item.oneWayFlight.destinationCity}
+                            {item.returnFlight.originCity}>
+                            {item.returnFlight.destinationCity}
                           </h4>
-                          <h4>Depart: {item.oneWayFlight.departureTime}</h4>
-                          <h4>Arrive: {item.oneWayFlight.arrivalTime}</h4>
+                          <h4>Depart: {item.returnFlight.departureTime}</h4>
+                          <h4>Arrive: {item.returnFlight.arrivalTime}</h4>
                         </div>
                       </div>
                     </div>
-                    <div className="flight-result__action-container"></div>
+                    <div className="flight-result__action-container">
+                      <div className="flight-result__action-placeholder"></div>
+                      <input
+                        type="button"
+                        value="Book this flight"
+                        className="form-button"
+                      />
+                    </div>
                   </div>
                 );
               })}

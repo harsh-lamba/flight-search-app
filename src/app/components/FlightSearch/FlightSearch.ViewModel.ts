@@ -27,11 +27,11 @@ export default class FlightSearchViewModel implements IFlightSearchViewModel {
   private _searchFlightService: ISearchFlightService;
   constructor() {
     this._isFlightFetching = false;
-    this._originCity = new Field("Enter Origin City", "PNQ");
-    this._destinationCity = new Field("Enter Destination City", "DEL");
-    this._departureDate = new Field("Departure Date", "16th Sep 2019");
-    this._returnDate = new Field("Return Date", "16th Sep 2019");
-    this._passengers = new Field("Passengers", "1");
+    this._originCity = new Field("Enter Origin City", "");
+    this._destinationCity = new Field("Enter Destination City", "");
+    this._departureDate = new Field("Departure Date", "");
+    this._returnDate = new Field("Return Date", "");
+    this._passengers = new Field("Passengers", "");
 
     this.fillDepartureDate();
     this.fillReturnDate();

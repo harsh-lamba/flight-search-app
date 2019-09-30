@@ -19,3 +19,32 @@
 .grid-2-of-3 {
   width: $result-view-width;
 }
+
+@media screen and (max-width: 960px) {
+  .container {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .grid-1-of-3 {
+    width: 40%;
+  }
+
+  .grid-2-of-3 {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 416px) {
+  .grid-container {
+    flex-direction: column;
+  }
+  .grid-1-of-3 {
+    width: 100%;
+  }
+
+  .grid-2-of-3 {
+    width: 100%;
+  }
+}
